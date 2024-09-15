@@ -1,0 +1,11 @@
+CC = g++
+CCFLAGS = -march=i586 -O2 -funroll-loops -ffast-math -fomit-frame-pointer
+LDFLAGS = -lalleg -mwindows
+FILES = ColorScale.cpp Integrator.cpp VectorField2D.cpp VectorField2DVisualizer.cpp Main.cpp
+
+demo: $(FILES)
+	$(CC) $(CCFLAGS) -o demo $(FILES) $(LDFLAGS)
+
+clean:
+	del demo.exe
+

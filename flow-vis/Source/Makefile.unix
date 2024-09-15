@@ -1,0 +1,11 @@
+CC = g++
+CCFLAGS = -O2 -funroll-loops -ffast-math -fomit-frame-pointer -fpermissive
+LDFLAGS = `allegro-config --libs`
+FILES = ColorScale.cpp Integrator.cpp VectorField2D.cpp VectorField2DVisualizer.cpp Main.cpp
+
+demo: $(FILES)
+	$(CC) $(CCFLAGS) -o demo $(FILES) $(LDFLAGS)
+
+clean:
+	rm demo
+

@@ -1,0 +1,10 @@
+CC = g++
+CCFLAGS = -O3 -funroll-loops -ffast-math -fomit-frame-pointer -fopenmp
+LDFLAGS = -lgomp -lpthread -lglut32 -lglu32 -lopengl32 -mwindows
+FILES = ColorScale.cpp ParticleAdvection.cpp LatticeSite.cpp LatticeBoltzmann.cpp Main.cpp
+
+lbdemo: $(FILES)
+	$(CC) $(CCFLAGS) -o lbdemo $(FILES) $(LDFLAGS)
+
+clean:
+	del lbdemo

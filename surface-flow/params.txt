@@ -1,0 +1,11 @@
+filename = mesh.off
+adt = advection dt
+g = gravity const
+fdt = apply force dt
+k = pressure const
+pdt = relaxation dt
+rho0 = equilibrium density
+eps = compressibility const
+ddt = dye advection dt
+nda = # dye advection steps
+tri = fill triangle index

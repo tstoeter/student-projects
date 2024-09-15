@@ -1,0 +1,11 @@
+CC = gcc
+CCFLAGS = -O2 -funroll-loops -ffast-math -fomit-frame-pointer
+LDFLAGS = -lfreeglut -lglu32 -lopengl32 -mwindows
+FILES = kreisel.c model.c
+
+kreisel: $(FILES)
+	$(CC) $(CCFLAGS) -o kreisel $(FILES) $(LDFLAGS)
+
+clean:
+	del kreisel
+

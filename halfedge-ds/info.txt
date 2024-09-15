@@ -1,0 +1,113 @@
+DOCUMENT: heds
+
+A simple and tiny halfedge data structure for triangle meshes.
+
+Version 0.1
+
+By Torsten Stöter, Apr 17, 2012
+
+torsten dot stoeter at st dot ovgu dot de
+
+TOPIC: Introduction
+Class heds is a simple and tiny halfedge data structure class for triangle
+meshes.
+
+For my final thesis project I needed an easy to use halfedge data structure to
+represent surface meshes. I also wanted to store additional information per face
+and per edge. However, I couldn't find any suitable existing implementations and
+ended up writing my own tiny halfedge class, which I want to share.
+
+Halfedge data structure:
+
+A halfedge data structure, also known as doubly connected edge list, may be used
+as a mesh representation to efficiently perform certain operations on it. In
+this representation the edges of a mesh are split longitudinal into two
+inversely directed halfedges, which form a halfedge pair. Unlike edges, which
+are undirected, a halfedge is directed - it originates from a source vertex and
+ends in another destination vertex. Additionally each halfedge has two neighbor
+halfedges, a predecessor halfedge at the source vertex and a successor halfedge
+at the destination vertex. A halfedge data structure allows efficient adjacency
+queries on meshes. These queries are linear in time with the number of items
+found, while the data structure is constant in space.
+See <[1] at http://en.wikipedia.org/wiki/Doubly_connected_edge_list>,
+<[2] at http://www.flipcode.com/archives/The_Half-Edge_Data_Structure.shtml>,
+<[3] at http://www.holmes3d.net/graphics/dcel/>,
+<[4] at http://www.cgal.org/Manual/latest/doc_html/cgal_manual/HalfedgeDS/Chapter_main.html>,
+or <[5] at http://openmesh.org/Documentation/OpenMesh-2.0RC3-Documentation/mesh_hds.html>
+for a more detailed description of the halfedge data structure and other
+implementations.
+
+References:
+
+[1] <http://en.wikipedia.org/wiki/Doubly_connected_edge_list>
+
+[2] <http://www.flipcode.com/archives/The_Half-Edge_Data_Structure.shtml>
+
+[3] <http://www.holmes3d.net/graphics/dcel/>
+
+[4] <http://www.cgal.org/Manual/latest/doc_html/cgal_manual/HalfedgeDS/Chapter_main.html>
+
+[5] <http://openmesh.org/Documentation/OpenMesh-2.0RC3-Documentation/mesh_hds.html>
+
+Class heds:
+
+The heds class is my own implementation of the halfedge data structure. It is
+easy to use and includes basic adjacency queries for vertices, edges and faces.
+Currently it supports triangle meshes only, which may have boundaries or contain
+holes.
+
+TOPIC: Quick Usage
+This is a very short demonstration of how to use the heds class.
+
+The heds class is a tiny header only class.
+First you need to include the header file heds.hpp in your source code to make
+it accessible:
+
+> #include "heds.hpp"
+
+For actually using it you need to declare a heds object and call the
+constructor, which creates the halfedge data structure
+
+> heds hemesh = heds(vertices, faces);
+
+where vertices is the vertex list and faces is the triangle list of the given
+triangle mesh. Now you can efficiently perform adjacency queries for the
+triangle mesh using the underlying halfedge data structure. For example
+
+> vector<int> one_ring = hemesh.vertices_around_vertex(100);
+
+to get the one-ring vertices of vertex 100, i.e. all neighbor vertices directly
+connected to vertex 100 via an edge.
+
+For more detailed information read the <docs>. For a complete example program
+see off2obj.cpp.
+
+TOPIC: License
+This software package is licensed under the BSD 3-Clause License.
+
+Copyright (c) 2012, Torsten Stöter
+
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without modification,
+are permitted provided that the following conditions are met:
+    * Redistributions of source code must retain the above copyright notice,
+      this list of conditions and the following disclaimer.
+    * Redistributions in binary form must reproduce the above copyright notice,
+      this list of conditions and the following disclaimer in the documentation
+      and/or other materials provided with the distribution.
+    * Neither the name of the organization nor the names of its contributors may
+      be used to endorse or promote products derived from this software without
+      specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR
+ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
